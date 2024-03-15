@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
+</head>
+<body>
+<h1>Animal</h1>
+
+<form method="post" th:action="@{/dashboard/animal}" th:object="${animal}">
+
+    <input type="text" th:field="*{nom}" placeholder="Nom"/><br>
+    <input type="date" th:field="*{dateNaissance}" placeholder="Date Naissance"/><br>
+    <textarea th:field="*{presentation}"></textarea>
+
+    <div th:if="${animal.id}" id="fileuploader">Upload</div>
+    <input type="hidden" id="idAnimal" th:field="*{id}"/>
+
+    <input type="submit" value="Enregistrer"/>
+
+</form>
+
+<table>
+    <tr>
+        <th>Nom</th>
+        <th></th>
+    </tr>
+    <tr th:each="animal : ${listAnimal}">
+        <td th:text="${animal.nom}"></td>
+        <td><a th:href="@{'/dashboard/animal?id=' + ${animal.id}}">Update</a></td>
+    </tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
+
+<script src="/assets/js-admin/scriptAnimal.js"></script>
+</body>
+</html>
